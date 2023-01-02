@@ -54,6 +54,7 @@ export default () => {
       previous[1] === 'Control'
     ) {
       create(content)
+      focusCreate()
       return
     }
     setPrevious([e.key, ...previous].slice(0, 2))
