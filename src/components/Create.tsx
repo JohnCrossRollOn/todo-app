@@ -95,6 +95,7 @@ export default () => {
               autoFocus
               className='flex-1 resize-none p-4 pt-12'
               onKeyDown={onKeyDown}
+              onBlur={display(false)}
             />
             <div className='font-mono font-bold tracking-tight flex text-sm hover:cursor-pointer text-center'>
               <motion.input
