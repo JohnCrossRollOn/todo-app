@@ -18,6 +18,15 @@ export default () => {
 
   const textarea = useRef<HTMLTextAreaElement>(null)
 
+  const focusCreate = (): void => {
+    setTimeout(() => {
+      const { current } = textarea
+      current?.focus()
+      current?.select()
+      current?.scrollIntoView({ behavior: 'smooth' })
+    }, 0)
+  }
+
   const display = (bool: boolean) => () => setDisplay(bool)
   const onChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
     setContent(e.target.value)
@@ -27,6 +36,7 @@ export default () => {
       create(content)
       setContent('')
     }
+    focusCreate()
   }
   const onSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
@@ -61,13 +71,6 @@ export default () => {
     }
   }, [todos])
 
-  useEffect(() => {
-    const { current } = textarea
-    current?.focus()
-    current?.select()
-    current?.scrollIntoView({ behavior: 'smooth' })
-  }, [todos])
-
   return (
     <motion.div layout className='h-64'>
       <LayoutGroup>
@@ -95,7 +98,6 @@ export default () => {
               autoFocus
               className='flex-1 resize-none p-4 pt-12'
               onKeyDown={onKeyDown}
-              onBlur={display(false)}
             />
             <div className='font-mono font-bold tracking-tight flex text-sm hover:cursor-pointer text-center'>
               <motion.input
